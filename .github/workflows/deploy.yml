@@ -37,7 +37,7 @@ jobs:
           PUBLIC_BASE_PATH: ${{ format('/{0}/', github.event.repository.name) }}
           PUBLIC_SUPABASE_URL: ${{ secrets.PUBLIC_SUPABASE_URL }}
           PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.PUBLIC_SUPABASE_ANON_KEY }}
-          PUBLIC_DATA_SOURCE: mock
+          PUBLIC_DATA_SOURCE: supabase
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
