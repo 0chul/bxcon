@@ -3,31 +3,67 @@ import Section from '@components/common/Section.astro';
 import ContactCta from '@components/content/ContactCta.astro';
 import NewsletterSignup from '@components/content/NewsletterSignup.astro';
 import PageLayout from '@layouts/PageLayout.astro';
-import { companyPages } from '@lib/mock-data';
 
-const page = companyPages.network;
+const assetBase = import.meta.env.BASE_URL;
+
+const partners = [
+  {
+    logoSrc: `${assetBase}company/partner-exc.png`,
+    logoAlt: 'EXC 파트너 로고',
+    title: 'HRM&HRD Partner',
+    lines: [
+      '국내 최대 규모의 기업교육회사이며,',
+      '인사/조직/교육/채용 관련 솔루션 및 교육운영 전문 파트너사',
+    ],
+    quote: "“컨설팅 결과의 체계적인 '내재화'를 지원합니다.”",
+    href: 'https://www.exc.co.kr',
+  },
+  {
+    logoSrc: `${assetBase}company/partner-consumer-insight.png`,
+    logoAlt: 'Consumer Insight 파트너 로고',
+    title: 'Research Partner',
+    lines: [
+      '86만 패널을 운영하는 조사회사이며,',
+      '금융/자동차/관광/통신/공공 분야 전문 리서치 파트너사',
+    ],
+    quote: "“빠르고 정확한 '고객조사 및 데이터 분석'을 지원합니다.”",
+    href: 'https://www.consumerinsight.co.kr/',
+  },
+] as const;
 ---
 
 <PageLayout
-  title="Network"
-  description={page.intro}
+  title="파트너 네트워크 - BX컨설팅"
+  description="BX컨설팅과 함께하는 신뢰할 수 있는 파트너사들과 협력 네트워크를 소개합니다."
   canonicalPath="/company/network/"
   eyebrow="Company"
 >
-  <Section eyebrow="Partnership" title={page.title} intro={page.intro}>
-    <div class="grid-3">
+  <Section
+    eyebrow="Company"
+    title="NETWORK"
+    intro="원본 사이트 기준으로 BX컨설팅의 파트너 네트워크와 협력사 소개 문구를 반영했습니다."
+  >
+    <div class="grid-2">
       {
-        page.highlights.map((item) => (
+        partners.map((partner) => (
           <article class="company-card">
-            <h2>{item.title}</h2>
-            <p>{item.body}</p>
+            <img class="company-card__logo-image" src={partner.logoSrc} alt={partner.logoAlt} loading="lazy" />
+            <span class="eyebrow">{partner.title}</span>
+            <h2>{partner.title}</h2>
+            <div class="company-card__copy">
+              {partner.lines.map((line) => <p>{line}</p>)}
+            </div>
+            <p class="form-note">{partner.quote}</p>
+            <a class="button-secondary" href={partner.href} target="_blank" rel="noreferrer">
+              파트너 사이트 보기
+            </a>
           </article>
         ))
       }
     </div>
   </Section>
 
-  <Section eyebrow="Connect" title="협업 네트워크와 프로젝트 구조를 함께 설계합니다.">
+  <Section eyebrow="Connect" title="필요한 전문 네트워크와 함께 문제를 풀어갑니다.">
     <div class="grid-2">
       <ContactCta />
       <NewsletterSignup />

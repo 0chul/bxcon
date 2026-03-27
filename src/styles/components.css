@@ -344,6 +344,24 @@
   color: var(--color-ink-soft);
 }
 
+.company-card__logo-image {
+  display: block;
+  width: auto;
+  max-width: min(220px, 100%);
+  height: 64px;
+  margin-bottom: 1rem;
+  object-fit: contain;
+  object-position: left center;
+}
+
+.company-card__copy p {
+  margin: 0;
+}
+
+.company-card__copy p + p {
+  margin-top: 0.35rem;
+}
+
 .stat-card__list {
   margin: 0;
   padding-left: 1.1rem;

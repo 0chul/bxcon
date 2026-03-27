@@ -1,24 +1,76 @@
 ---
 import Section from '@components/common/Section.astro';
+import CoreValueIcon from '@components/company/CoreValueIcon.astro';
 import ContactCta from '@components/content/ContactCta.astro';
 import NewsletterSignup from '@components/content/NewsletterSignup.astro';
 import PageLayout from '@layouts/PageLayout.astro';
-import { companyPages } from '@lib/mock-data';
 
-const page = companyPages.vmc;
+const vision =
+  "우리는 사람과 기술, 조직과 사회를 잇는 '경험 기반 전략'의 글로벌 표준이 된다.";
+const mission = '데이터와 통찰로 사람 중심의 경험을 전략화하며, 실행가능한 성장을 설계한다.';
+
+const coreValues = [
+  {
+    kind: 'people-first',
+    title: 'People First',
+    body: '모든 전략은 사람 중심에서 시작합니다.',
+  },
+  {
+    kind: 'work-together',
+    title: 'Work Together',
+    body: '고객과 함께 전략을 설계하고 실행합니다.',
+  },
+  {
+    kind: 'smart-simple',
+    title: 'Smart & Simple',
+    body: '복잡한 문제를 쉽게, 명확하게 해결합니다.',
+  },
+  {
+    kind: 'think-long',
+    title: 'Think Long',
+    body: '단기 성과보다 지속 가능한 가치를 추구합니다.',
+  },
+  {
+    kind: 'facts-matter',
+    title: 'Facts Matter',
+    body: '데이터 기반 판단은 모든 변화의 출발점입니다.',
+  },
+  {
+    kind: 'be-real',
+    title: 'Be Real',
+    body: '본질에 집중한 진짜 혁신을 만들어냅니다.',
+  },
+] as const;
 ---
 
 <PageLayout
-  title="VMC"
-  description={page.intro}
+  title="VMC - 비전·미션·코어밸류 - BX컨설팅"
+  description="BX컨설팅의 비전(Vision), 미션(Mission), 코어밸류(Core Value)를 확인하세요."
   canonicalPath="/company/vmc/"
   eyebrow="Company"
 >
-  <Section eyebrow="Framework" title={page.title} intro={page.intro}>
+  <Section eyebrow="Company" title="VMC" intro="BX Vision, BX Mission, BX Core Value를 소개합니다.">
+    <div class="grid-2">
+      <article class="company-card">
+        <span class="eyebrow">BX Vision</span>
+        <h2>BX Vision</h2>
+        <p>{vision}</p>
+      </article>
+      <article class="company-card">
+        <span class="eyebrow">BX Mission</span>
+        <h2>BX Mission</h2>
+        <p>{mission}</p>
+      </article>
+    </div>
+  </Section>
+
+  <Section eyebrow="Core Value" title="BX Core Value" intro="원본 사이트의 코어밸류 문구를 그대로 반영했습니다.">
     <div class="grid-3">
       {
-        page.highlights.map((item) => (
+        coreValues.map((item) => (
           <article class="company-card">
+            <CoreValueIcon kind={item.kind} title={item.title} />
+            <span class="eyebrow">{item.title}</span>
             <h2>{item.title}</h2>
             <p>{item.body}</p>
           </article>
@@ -27,7 +79,7 @@ const page = companyPages.vmc;
     </div>
   </Section>
 
-  <Section eyebrow="Connect" title="BX컨설팅의 관점과 협업 방식을 더 이야기해 보세요.">
+  <Section eyebrow="Connect" title="BX컨설팅과 이야기를 나눠보세요.">
     <div class="grid-2">
       <ContactCta />
       <NewsletterSignup />
