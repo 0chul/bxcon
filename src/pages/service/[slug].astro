@@ -36,7 +36,13 @@ if (!service) {
           {section.features.map((feature) => (
             <article class="stat-card">
               <h3 style="margin-top: 0;">{feature.title}</h3>
-              <p class="form-note">{feature.description}</p>
+              {feature.items?.length ? (
+                <ul class="stat-card__list">
+                  {feature.items.map((item) => <li>{item}</li>)}
+                </ul>
+              ) : (
+                <p class="form-note">{feature.description}</p>
+              )}
             </article>
           ))}
         </div>

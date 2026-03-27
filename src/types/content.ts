@@ -70,6 +70,7 @@ export interface PortfolioDetail extends ArticleDetail {
 export interface ServiceFeature {
   title: string;
   description: string;
+  items?: string[];
 }
 
 export interface ServiceSection {

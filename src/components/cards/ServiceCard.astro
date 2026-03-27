@@ -7,12 +7,15 @@ interface Props {
 }
 
 const { item } = Astro.props;
+const imageSrc = item.hero.image.publicUrl.startsWith('http')
+  ? item.hero.image.publicUrl
+  : withBase(item.hero.image.publicUrl);
 ---
 
 <article class="service-card">
   <a href={withBase(`/service/${item.slug}/`)}>
     <div class="service-card__image">
-      <img src={withBase(item.hero.image.publicUrl)} alt={item.hero.image.alt} loading="lazy" />
+      <img src={imageSrc} alt={item.hero.image.alt} loading="lazy" />
     </div>
     <div class="eyebrow">{item.hero.eyebrow}</div>
     <h3>{item.title}</h3>

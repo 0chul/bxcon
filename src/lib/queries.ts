@@ -14,7 +14,8 @@ import type {
   MediaAssetRow,
   PortfolioDetailRow,
 } from '@models/supabase';
-import { contentByKind, homePageData, servicePages } from './mock-data';
+import { contentByKind, homePageData } from './mock-data';
+import { servicePages } from './service-pages';
 import { createSeo } from './seo';
 import { getSupabaseClient, shouldUseSupabase } from './supabase';
 
@@ -202,7 +203,10 @@ export const listFeaturedContent = async () => {
 
 export const getHomePageData = async (): Promise<HomePageData> => {
   if (!shouldUseSupabase()) {
-    return homePageData;
+    return {
+      ...homePageData,
+      serviceHighlights: servicePages,
+    };
   }
 
   const [services, portfolio, insight, report, press] = await Promise.all([
