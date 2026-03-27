@@ -1,0 +1,36 @@
+---
+import Section from '@components/common/Section.astro';
+import ContactCta from '@components/content/ContactCta.astro';
+import NewsletterSignup from '@components/content/NewsletterSignup.astro';
+import PageLayout from '@layouts/PageLayout.astro';
+import { companyPages } from '@lib/mock-data';
+
+const page = companyPages.vmc;
+---
+
+<PageLayout
+  title="VMC"
+  description={page.intro}
+  canonicalPath="/company/vmc/"
+  eyebrow="Company"
+>
+  <Section eyebrow="Framework" title={page.title} intro={page.intro}>
+    <div class="grid-3">
+      {
+        page.highlights.map((item) => (
+          <article class="company-card">
+            <h2>{item.title}</h2>
+            <p>{item.body}</p>
+          </article>
+        ))
+      }
+    </div>
+  </Section>
+
+  <Section eyebrow="Connect" title="BX컨설팅의 관점과 협업 방식을 더 이야기해 보세요.">
+    <div class="grid-2">
+      <ContactCta />
+      <NewsletterSignup />
+    </div>
+  </Section>
+</PageLayout>

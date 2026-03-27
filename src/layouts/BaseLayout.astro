@@ -1,0 +1,42 @@
+---
+import SeoHead from '@components/common/SeoHead.astro';
+import SiteFooter from '@components/common/SiteFooter.astro';
+import SiteHeader from '@components/common/SiteHeader.astro';
+import '@styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  canonicalPath: string;
+  ogImageUrl?: string;
+  robots?: string;
+}
+
+const { title, description, canonicalPath, ogImageUrl, robots } = Astro.props;
+---
+
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL}favicon.svg`} />
+    <SeoHead
+      title={title}
+      description={description}
+      canonicalPath={canonicalPath}
+      ogImageUrl={ogImageUrl}
+      robots={robots}
+    />
+  </head>
+  <body>
+    <div class="site-shell">
+      <SiteHeader />
+      <main class="site-main">
+        <slot />
+      </main>
+      <SiteFooter />
+    </div>
+  </body>
+</html>

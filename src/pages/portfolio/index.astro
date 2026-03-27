@@ -1,0 +1,32 @@
+---
+import Section from '@components/common/Section.astro';
+import ContentGrid from '@components/content/ContentGrid.astro';
+import ContactCta from '@components/content/ContactCta.astro';
+import NewsletterSignup from '@components/content/NewsletterSignup.astro';
+import PageLayout from '@layouts/PageLayout.astro';
+import { listContent } from '@lib/queries';
+
+const items = await listContent('portfolio');
+---
+
+<PageLayout
+  title="포트폴리오"
+  description="BX컨설팅이 수행한 프로젝트와 성과 사례를 정적 목록 구조로 제공합니다."
+  canonicalPath="/portfolio/"
+  eyebrow="Portfolio"
+>
+  <Section
+    eyebrow="Selected Work"
+    title="산업과 과제 맥락을 함께 보여주는 수행사례"
+    intro="현재는 샘플 데이터 기반 스텁 페이지이며, 이후 Supabase CMS 데이터로 치환됩니다."
+  >
+    <ContentGrid items={items} variant="portfolio" />
+  </Section>
+
+  <Section eyebrow="Connect" title="다음 프로젝트를 함께 설계해 보세요.">
+    <div class="grid-2">
+      <ContactCta />
+      <NewsletterSignup />
+    </div>
+  </Section>
+</PageLayout>

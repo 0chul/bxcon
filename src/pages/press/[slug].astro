@@ -1,0 +1,27 @@
+---
+import ArticleLayout from '@layouts/ArticleLayout.astro';
+import { getContentDetail, listContent } from '@lib/queries';
+
+export const getStaticPaths = async () => {
+  const items = await listContent('press');
+  return items.map((item) => ({
+    params: { slug: item.slug },
+  }));
+};
+
+const { slug } = Astro.params;
+const item = slug ? await getContentDetail('press', slug) : null;
+
+if (!item || item.kind !== 'press') {
+  throw new Error(`Unknown press slug: ${slug}`);
+}
+---
+
+<ArticleLayout
+  item={item}
+  breadcrumbs={[
+    { label: '홈', href: '/' },
+    { label: '보도자료', href: '/press/' },
+    { label: item.title },
+  ]}
+/>

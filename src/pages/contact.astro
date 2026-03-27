@@ -1,0 +1,120 @@
+---
+import Section from '@components/common/Section.astro';
+import NewsletterSignup from '@components/content/NewsletterSignup.astro';
+import PageLayout from '@layouts/PageLayout.astro';
+import { siteConfig } from '@lib/site-config';
+
+const endpoint = import.meta.env.PUBLIC_SUPABASE_URL
+  ? `${import.meta.env.PUBLIC_SUPABASE_URL}/functions/v1/submit-contact`
+  : '';
+const anonKey = import.meta.env.PUBLIC_SUPABASE_ANON_KEY || '';
+---
+
+<PageLayout
+  title="문의하기"
+  description="BX컨설팅과 전략, 고객경험, 리서치, 시스템, AI 과제를 논의할 수 있는 문의 페이지입니다."
+  canonicalPath="/contact/"
+  eyebrow="Contact"
+>
+  <Section
+    eyebrow="Start a Project"
+    title="필요한 문제 정의부터 함께 정리합니다."
+    intro={`대표 문의 ${siteConfig.contactPhone} / ${siteConfig.contactEmail}`}
+  >
+    <div class="grid-2">
+      <div class="cta-panel">
+        <form class="contact-form" data-contact-form data-endpoint={endpoint} data-anon-key={anonKey}>
+          <div class="form-row">
+            <div class="field">
+              <label for="contact-name">이름</label>
+              <input id="contact-name" name="name" type="text" required />
+            </div>
+            <div class="field">
+              <label for="contact-company">회사명</label>
+              <input id="contact-company" name="company" type="text" />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="field">
+              <label for="contact-email">이메일</label>
+              <input id="contact-email" name="email" type="email" required />
+            </div>
+            <div class="field">
+              <label for="contact-phone">연락처</label>
+              <input id="contact-phone" name="phone" type="tel" />
+            </div>
+          </div>
+          <div class="field">
+            <label for="contact-subject">문의 주제</label>
+            <input id="contact-subject" name="subject" type="text" required />
+          </div>
+          <div class="field">
+            <label for="contact-message">문의 내용</label>
+            <textarea id="contact-message" name="message" required></textarea>
+          </div>
+          <label class="form-note">
+            <input name="consentPrivacy" type="checkbox" value="true" required />
+            개인정보 수집 및 이용에 동의합니다.
+          </label>
+          <div class="cta-actions">
+            <button class="button" type="submit">문의 보내기</button>
+            <span class="status-message" data-contact-status></span>
+          </div>
+        </form>
+      </div>
+
+      <NewsletterSignup />
+    </div>
+  </Section>
+</PageLayout>
+
+<script is:inline>
+  const forms = document.querySelectorAll('[data-contact-form]');
+
+  forms.forEach((form) => {
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const endpoint = form.getAttribute('data-endpoint');
+      const anonKey = form.getAttribute('data-anon-key');
+      const statusNode = form.querySelector('[data-contact-status]');
+      const formData = new FormData(form);
+      const payload = {
+        name: String(formData.get('name') || '').trim(),
+        company: String(formData.get('company') || '').trim(),
+        email: String(formData.get('email') || '').trim(),
+        phone: String(formData.get('phone') || '').trim(),
+        subject: String(formData.get('subject') || '').trim(),
+        message: String(formData.get('message') || '').trim(),
+        consentPrivacy: formData.get('consentPrivacy') === 'true',
+      };
+
+      if (!endpoint || !anonKey) {
+        statusNode.textContent = '현재는 샘플 모드입니다. Supabase 환경변수 연결 후 실제 문의가 저장됩니다.';
+        return;
+      }
+
+      statusNode.textContent = '문의 내용을 전송하는 중입니다.';
+
+      try {
+        const response = await fetch(endpoint, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            apikey: anonKey,
+            Authorization: `Bearer ${anonKey}`,
+          },
+          body: JSON.stringify(payload),
+        });
+
+        if (!response.ok) {
+          throw new Error('contact failed');
+        }
+
+        statusNode.textContent = '문의가 접수되었습니다. 확인 후 연락드리겠습니다.';
+        form.reset();
+      } catch {
+        statusNode.textContent = '문의 전송에 실패했습니다. 잠시 후 다시 시도해 주세요.';
+      }
+    });
+  });
+</script>

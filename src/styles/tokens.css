@@ -1,0 +1,18 @@
+:root {
+  --color-ink: #171717;
+  --color-ink-soft: #505050;
+  --color-bg: #f6f1e8;
+  --color-surface: #fffaf4;
+  --color-surface-strong: #f0e2ce;
+  --color-line: rgba(23, 23, 23, 0.12);
+  --color-brand: #a6461c;
+  --color-brand-strong: #7d2f10;
+  --color-accent: #1f5c4d;
+  --shadow-soft: 0 18px 60px rgba(52, 40, 25, 0.08);
+  --radius-sm: 12px;
+  --radius-md: 20px;
+  --radius-lg: 32px;
+  --container: 1180px;
+  --font-sans: "SUIT Variable", "Pretendard Variable", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  --font-serif: "MaruBuri", "Iowan Old Style", "Times New Roman", serif;
+}

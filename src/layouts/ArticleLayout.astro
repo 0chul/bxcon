@@ -1,0 +1,51 @@
+---
+import type { ArticleDetail, PortfolioDetail } from '@models/content';
+import ArticleHero from '@components/content/ArticleHero.astro';
+import ArticleMeta from '@components/content/ArticleMeta.astro';
+import ContactCta from '@components/content/ContactCta.astro';
+import NewsletterSignup from '@components/content/NewsletterSignup.astro';
+import RichArticleBody from '@components/content/RichArticleBody.astro';
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+  item: ArticleDetail | PortfolioDetail;
+  breadcrumbs: { label: string; href?: string }[];
+  extraMeta?: string[];
+}
+
+const { item, breadcrumbs, extraMeta = [] } = Astro.props;
+---
+
+<BaseLayout
+  title={item.seo.title}
+  description={item.seo.description}
+  canonicalPath={item.seo.canonicalPath}
+  ogImageUrl={item.seo.ogImageUrl}
+  robots={item.seo.robots}
+>
+  <ArticleHero item={item} breadcrumbs={breadcrumbs} />
+
+  <section class="section" style="padding-top: 0;">
+    <div class="container article-layout">
+      <article class="article-panel">
+        <ArticleMeta publishedAt={item.publishedAt} authorName={item.authorName} extra={extraMeta} />
+        <div style="height: 1.5rem;"></div>
+        <RichArticleBody html={item.bodyHtml} />
+      </article>
+
+      <aside class="toc-panel">
+        <span class="eyebrow">Contents</span>
+        <ul>
+          {item.toc.map((entry) => <li><a href={`#${entry.id}`}>{entry.label}</a></li>)}
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top: 0;">
+    <div class="container grid-2">
+      <NewsletterSignup />
+      <ContactCta />
+    </div>
+  </section>
+</BaseLayout>

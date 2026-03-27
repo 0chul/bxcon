@@ -1,0 +1,27 @@
+---
+import ArticleLayout from '@layouts/ArticleLayout.astro';
+import { getContentDetail, listContent } from '@lib/queries';
+
+export const getStaticPaths = async () => {
+  const items = await listContent('insight');
+  return items.map((item) => ({
+    params: { slug: item.slug },
+  }));
+};
+
+const { slug } = Astro.params;
+const item = slug ? await getContentDetail('insight', slug) : null;
+
+if (!item || item.kind !== 'insight') {
+  throw new Error(`Unknown insight slug: ${slug}`);
+}
+---
+
+<ArticleLayout
+  item={item}
+  breadcrumbs={[
+    { label: '홈', href: '/' },
+    { label: '인사이트', href: '/insight/' },
+    { label: item.title },
+  ]}
+/>

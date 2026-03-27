@@ -1,0 +1,26 @@
+---
+import { navGroups, siteConfig, withBase } from '@lib/site-config';
+---
+
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a class="site-brand" href={withBase('/')}>
+      <img src={withBase('/favicon.svg')} alt="" width="42" height="42" />
+      <span>{siteConfig.siteName}</span>
+    </a>
+
+    <nav aria-label="주요 메뉴" class="nav-groups">
+      {
+        navGroups.map((group) => (
+          <details class="nav-group">
+            <summary>{group.label}</summary>
+            <div class="nav-menu">
+              {group.links.map((link) => <a href={withBase(link.href)}>{link.label}</a>)}
+            </div>
+          </details>
+        ))
+      }
+      <a class="button-secondary" href={withBase('/contact/')}>문의하기</a>
+    </nav>
+  </div>
+</header>

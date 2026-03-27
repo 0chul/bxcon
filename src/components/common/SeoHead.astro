@@ -1,0 +1,38 @@
+---
+import { pageTitle, resolveOgImage } from '@lib/seo';
+import { absoluteUrl, siteConfig } from '@lib/site-config';
+
+interface Props {
+  title: string;
+  description: string;
+  canonicalPath: string;
+  ogImageUrl?: string;
+  robots?: string;
+}
+
+const {
+  title,
+  description,
+  canonicalPath,
+  ogImageUrl,
+  robots = 'index,follow',
+} = Astro.props;
+
+const canonicalUrl = absoluteUrl(canonicalPath);
+const ogImage = resolveOgImage(ogImageUrl);
+---
+
+<title>{pageTitle(title)}</title>
+<meta name="description" content={description} />
+<meta name="robots" content={robots} />
+<link rel="canonical" href={canonicalUrl} />
+<meta property="og:site_name" content={siteConfig.siteName} />
+<meta property="og:type" content="website" />
+<meta property="og:title" content={pageTitle(title)} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonicalUrl} />
+<meta property="og:image" content={ogImage} />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={pageTitle(title)} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImage} />

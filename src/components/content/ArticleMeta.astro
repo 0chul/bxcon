@@ -1,0 +1,15 @@
+---
+interface Props {
+  publishedAt: string;
+  authorName: string;
+  extra?: string[];
+}
+
+const { publishedAt, authorName, extra = [] } = Astro.props;
+---
+
+<div class="meta-row">
+  <span>{publishedAt}</span>
+  <span>{authorName}</span>
+  {extra.map((entry) => <span>{entry}</span>)}
+</div>

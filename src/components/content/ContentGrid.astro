@@ -1,0 +1,24 @@
+---
+import type { ContentListItem, PortfolioDetail } from '@models/content';
+import ContentCard from '@components/cards/ContentCard.astro';
+import PortfolioCard from '@components/cards/PortfolioCard.astro';
+
+interface Props {
+  items: ContentListItem[] | PortfolioDetail[];
+  variant?: 'default' | 'portfolio';
+}
+
+const { items, variant = 'default' } = Astro.props;
+---
+
+<div class="content-grid">
+  {
+    items.map((item) =>
+      variant === 'portfolio' ? (
+        <PortfolioCard item={item as PortfolioDetail} />
+      ) : (
+        <ContentCard item={item as ContentListItem} />
+      ),
+    )
+  }
+</div>

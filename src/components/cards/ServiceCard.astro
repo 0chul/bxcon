@@ -1,0 +1,21 @@
+---
+import type { ServicePage } from '@models/content';
+import { withBase } from '@lib/site-config';
+
+interface Props {
+  item: ServicePage;
+}
+
+const { item } = Astro.props;
+---
+
+<article class="service-card">
+  <a href={withBase(`/service/${item.slug}/`)}>
+    <div class="service-card__image">
+      <img src={withBase(item.hero.image.publicUrl)} alt={item.hero.image.alt} loading="lazy" />
+    </div>
+    <div class="eyebrow">{item.hero.eyebrow}</div>
+    <h3>{item.title}</h3>
+    <p>{item.subtitle}</p>
+  </a>
+</article>

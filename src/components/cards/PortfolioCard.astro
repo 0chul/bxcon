@@ -1,0 +1,25 @@
+---
+import type { PortfolioDetail } from '@models/content';
+import { withBase } from '@lib/site-config';
+
+interface Props {
+  item: PortfolioDetail;
+}
+
+const { item } = Astro.props;
+---
+
+<article class="content-card">
+  <a href={withBase(`/portfolio/${item.slug}/`)}>
+    <div class="content-card__image">
+      <img src={withBase(item.thumbnail.publicUrl)} alt={item.thumbnail.alt} loading="lazy" />
+    </div>
+    <div class="eyebrow">{item.industry}</div>
+    <h3>{item.title}</h3>
+    <p>{item.summary}</p>
+    <div class="meta-row">
+      <span>{item.clientName}</span>
+      <span>{item.projectPeriod}</span>
+    </div>
+  </a>
+</article>

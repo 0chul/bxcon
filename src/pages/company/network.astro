@@ -1,0 +1,36 @@
+---
+import Section from '@components/common/Section.astro';
+import ContactCta from '@components/content/ContactCta.astro';
+import NewsletterSignup from '@components/content/NewsletterSignup.astro';
+import PageLayout from '@layouts/PageLayout.astro';
+import { companyPages } from '@lib/mock-data';
+
+const page = companyPages.network;
+---
+
+<PageLayout
+  title="Network"
+  description={page.intro}
+  canonicalPath="/company/network/"
+  eyebrow="Company"
+>
+  <Section eyebrow="Partnership" title={page.title} intro={page.intro}>
+    <div class="grid-3">
+      {
+        page.highlights.map((item) => (
+          <article class="company-card">
+            <h2>{item.title}</h2>
+            <p>{item.body}</p>
+          </article>
+        ))
+      }
+    </div>
+  </Section>
+
+  <Section eyebrow="Connect" title="협업 네트워크와 프로젝트 구조를 함께 설계합니다.">
+    <div class="grid-2">
+      <ContactCta />
+      <NewsletterSignup />
+    </div>
+  </Section>
+</PageLayout>

@@ -1,0 +1,57 @@
+---
+import Section from '@components/common/Section.astro';
+import ContactCta from '@components/content/ContactCta.astro';
+import NewsletterSignup from '@components/content/NewsletterSignup.astro';
+import PageLayout from '@layouts/PageLayout.astro';
+import { getServicePage, listServicePages } from '@lib/queries';
+import type { ServiceSlug } from '@models/content';
+
+export const getStaticPaths = async () => {
+  const services = await listServicePages();
+  return services.map((item) => ({
+    params: { slug: item.slug },
+  }));
+};
+
+const { slug } = Astro.params;
+const service = slug ? await getServicePage(slug as ServiceSlug) : null;
+
+if (!service) {
+  throw new Error(`Unknown service slug: ${slug}`);
+}
+---
+
+<PageLayout
+  title={service.seo.title}
+  description={service.seo.description}
+  canonicalPath={service.seo.canonicalPath}
+  eyebrow={service.hero.eyebrow}
+  heroTitle={service.title}
+  heroText={service.subtitle}
+>
+  {
+    service.sections.map((section) => (
+      <Section eyebrow={section.eyebrow} title={section.title} intro={section.intro} id={section.id}>
+        <div class="grid-3">
+          {section.features.map((feature) => (
+            <article class="stat-card">
+              <h3 style="margin-top: 0;">{feature.title}</h3>
+              <p class="form-note">{feature.description}</p>
+            </article>
+          ))}
+        </div>
+      </Section>
+    ))
+  }
+
+  <Section
+    eyebrow="Next"
+    title="서비스 검토를 바로 이어갈 수 있도록"
+    intro="문의와 뉴스레터 구성은 모든 상세 페이지에서 재사용됩니다."
+  >
+    <div class="grid-2">
+      <NewsletterSignup />
+      <ContactCta />
+    </div>
+  </Section>
+</PageLayout>

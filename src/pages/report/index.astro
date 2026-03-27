@@ -1,0 +1,28 @@
+---
+import Section from '@components/common/Section.astro';
+import ContentGrid from '@components/content/ContentGrid.astro';
+import NewsletterSignup from '@components/content/NewsletterSignup.astro';
+import ContactCta from '@components/content/ContactCta.astro';
+import PageLayout from '@layouts/PageLayout.astro';
+import { listContent } from '@lib/queries';
+
+const items = await listContent('report');
+---
+
+<PageLayout
+  title="기획조사"
+  description="시장과 산업을 깊이 분석한 BX컨설팅 리서치 리포트와 조사 콘텐츠입니다."
+  canonicalPath="/report/"
+  eyebrow="Report"
+>
+  <Section eyebrow="Research" title="의사결정에 필요한 근거를 정리합니다.">
+    <ContentGrid items={items} />
+  </Section>
+
+  <Section eyebrow="Connect" title="조사 결과를 실행 과제로 연결해 보세요.">
+    <div class="grid-2">
+      <ContactCta />
+      <NewsletterSignup />
+    </div>
+  </Section>
+</PageLayout>

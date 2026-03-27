@@ -1,0 +1,28 @@
+---
+import Section from '@components/common/Section.astro';
+import ContentGrid from '@components/content/ContentGrid.astro';
+import NewsletterSignup from '@components/content/NewsletterSignup.astro';
+import ContactCta from '@components/content/ContactCta.astro';
+import PageLayout from '@layouts/PageLayout.astro';
+import { listContent } from '@lib/queries';
+
+const items = await listContent('press');
+---
+
+<PageLayout
+  title="보도자료"
+  description="BX컨설팅의 공식 소식과 외부 발표 내용을 정리한 보도자료 목록입니다."
+  canonicalPath="/press/"
+  eyebrow="Press"
+>
+  <Section eyebrow="Newsroom" title="BX컨설팅의 공식 업데이트">
+    <ContentGrid items={items} />
+  </Section>
+
+  <Section eyebrow="Follow" title="새로운 발표와 콘텐츠를 함께 받아보세요.">
+    <div class="grid-2">
+      <NewsletterSignup />
+      <ContactCta />
+    </div>
+  </Section>
+</PageLayout>

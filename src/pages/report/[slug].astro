@@ -1,0 +1,27 @@
+---
+import ArticleLayout from '@layouts/ArticleLayout.astro';
+import { getContentDetail, listContent } from '@lib/queries';
+
+export const getStaticPaths = async () => {
+  const items = await listContent('report');
+  return items.map((item) => ({
+    params: { slug: item.slug },
+  }));
+};
+
+const { slug } = Astro.params;
+const item = slug ? await getContentDetail('report', slug) : null;
+
+if (!item || item.kind !== 'report') {
+  throw new Error(`Unknown report slug: ${slug}`);
+}
+---
+
+<ArticleLayout
+  item={item}
+  breadcrumbs={[
+    { label: '홈', href: '/' },
+    { label: '기획조사', href: '/report/' },
+    { label: item.title },
+  ]}
+/>

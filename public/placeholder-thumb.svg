@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675">
+  <defs>
+    <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#f0e2ce"/>
+      <stop offset="100%" stop-color="#fffaf4"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="675" fill="url(#g)"/>
+  <path d="M120 565 430 240l170 180 125-110 355 255H120Z" fill="#1f5c4d" opacity=".12"/>
+  <circle cx="935" cy="165" r="96" fill="#a6461c" opacity=".18"/>
+  <text x="100" y="180" font-family="Georgia, serif" font-size="68" fill="#171717">BXCON Sample Asset</text>
+  <text x="100" y="252" font-family="Arial, sans-serif" font-size="30" fill="#505050">Placeholder visual for static Astro page stubs</text>
+</svg>
