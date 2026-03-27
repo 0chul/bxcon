@@ -6,8 +6,13 @@ import { navGroups, siteConfig, withBase } from '@lib/site-config';
   <div class="container site-footer__grid">
     <div>
       <div class="site-brand">
-        <img src={withBase('/favicon.svg')} alt="" width="42" height="42" />
-        <span>{siteConfig.siteName}</span>
+        <img
+          class="site-brand__image site-brand__image--footer"
+          src={siteConfig.brandAssets.footerLogo}
+          alt={siteConfig.siteNameEn}
+          width="212"
+          height="30"
+        />
       </div>
       <p class="form-note">
         경험에서 전략을, 전략에서 성장을 만듭니다. BX컨설팅은 전략과 현장 실행을 연결하는 파트너입니다.

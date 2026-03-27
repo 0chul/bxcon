@@ -5,8 +5,13 @@ import { navGroups, siteConfig, withBase } from '@lib/site-config';
 <header class="site-header">
   <div class="container site-header__inner">
     <a class="site-brand" href={withBase('/')}>
-      <img src={withBase('/favicon.svg')} alt="" width="42" height="42" />
-      <span>{siteConfig.siteName}</span>
+      <img
+        class="site-brand__image site-brand__image--header"
+        src={siteConfig.brandAssets.headerLogo}
+        alt={siteConfig.siteNameEn}
+        width="172"
+        height="52"
+      />
     </a>
 
     <nav aria-label="주요 메뉴" class="nav-groups">

@@ -7,6 +7,12 @@ export const siteConfig = {
   siteNameEn: 'Business eXcellence Consulting',
   siteUrl: import.meta.env.PUBLIC_SITE_URL || 'https://example.github.io',
   basePath: import.meta.env.PUBLIC_BASE_PATH || '/',
+  brandAssets: {
+    headerLogo:
+      'https://qqhwhhtsidiozxnrajlp.supabase.co/storage/v1/object/public/site-media/shared/logo.png',
+    footerLogo:
+      'https://qqhwhhtsidiozxnrajlp.supabase.co/storage/v1/object/public/site-media/shared/footer-logo.png',
+  },
   contactEmail: 'contact@bxcon.co.kr',
   contactPhone: '02-2152-3937',
   contactFax: '02-538-6996',
