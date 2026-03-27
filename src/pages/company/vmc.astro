@@ -7,7 +7,8 @@ import PageLayout from '@layouts/PageLayout.astro';
 
 const vision =
   "우리는 사람과 기술, 조직과 사회를 잇는 '경험 기반 전략'의 글로벌 표준이 된다.";
-const mission = '데이터와 통찰로 사람 중심의 경험을 전략화하며, 실행가능한 성장을 설계한다.';
+const mission =
+  '데이터와 통찰로 사람 중심의 경험을 전략화하며, 실행가능한 성장을 설계한다.';
 
 const coreValues = [
   {
@@ -48,8 +49,10 @@ const coreValues = [
   description="BX컨설팅의 비전(Vision), 미션(Mission), 코어밸류(Core Value)를 확인하세요."
   canonicalPath="/company/vmc/"
   eyebrow="Company"
+  heroTitle="회사소개"
+  heroText="BX컨설팅의 비전(Vision), 미션(Mission), 코어밸류(Core Value)를 확인하세요."
 >
-  <Section eyebrow="Company" title="VMC" intro="BX Vision, BX Mission, BX Core Value를 소개합니다.">
+  <Section eyebrow="Company" title="VMC">
     <div class="grid-2">
       <article class="company-card">
         <span class="eyebrow">BX Vision</span>
@@ -64,7 +67,7 @@ const coreValues = [
     </div>
   </Section>
 
-  <Section eyebrow="Core Value" title="BX Core Value" intro="원본 사이트의 코어밸류 문구를 그대로 반영했습니다.">
+  <Section eyebrow="Core Value" title="BX Core Value">
     <div class="grid-3">
       {
         coreValues.map((item) => (
@@ -81,8 +84,8 @@ const coreValues = [
 
   <Section eyebrow="Connect" title="BX컨설팅과 이야기를 나눠보세요.">
     <div class="grid-2">
-      <ContactCta />
       <NewsletterSignup />
+      <ContactCta />
     </div>
   </Section>
 </PageLayout>
